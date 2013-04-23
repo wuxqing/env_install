@@ -1,0 +1,12 @@
+set daemon 5 				# 每5秒检测1次
+set logfile /work/log/monit.log
+set alert wuxqing@gmail.com
+set httpd port 2812 and use address 127.0.0.1
+    allow 127.0.0.1/255.255.255.0   	# 允许连入的IP
+    allow monit:Monit_Pwd 	# 基本的验证
+
+check process php-fpm with pidfile /var/run/php-fpm.pid
+   start program = "/opt/php-5.4.11/sbin/php-fpm"
+   stop program = "kill $(cat /var/run/php-fpm.pid)"
+   if 5 restarts within 5 cycles then timeout
+

@@ -1,0 +1,65 @@
+#! /bin/sh
+#
+# nginx         HTTP and reverse proxy server
+#
+# chkconfig:    2345 98 02
+# description:  nginx [engine x] is an HTTP and reverse proxy server, 
+#               as well as a mail proxy server, written by Igor Sysoev.
+# processname:  nginx
+# pidfile:      /var/run/nginx/nginx.pid
+# cp -> /etc/rc.d/init.d/nginxd
+# chmod +x /etc/rc.d/init.d/nginxd
+# chkconfig --add nginxd
+# chkconfig nginxd on
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+# Source networking configuration.
+. /etc/sysconfig/network
+
+NGINX=/opt/nginx-1.2.6/sbin/nginx
+
+# Source nginx configuration.
+if [ -f /etc/sysconfig/nginx ] ; then
+        . /etc/sysconfig/nginx
+fi
+
+[ -f $NGINX ] || exit 0
+
+RETVAL=0
+
+# See how we were called.
+case "$1" in
+  start)
+        echo -n "Starting nginx: "
+        daemon $NICELEVEL $NGINX
+        RETVAL=$?
+        echo
+        [ $RETVAL = 0 ] && touch /var/lock/nginx.lock
+        ;;
+  stop)
+        echo -n "Stopping nginx: "
+        killproc nginx
+        RETVAL=$?
+        echo
+        [ $RETVAL = 0 ] && rm -f /var/lock/nginx.lock
+        ;;
+  restart)
+  	$0 stop
+	$0 start
+	RETVAL=$?
+	;;
+  condrestart)
+       [ -e /var/lock/nginx.lock ] && $0 restart
+       ;;
+  status)
+        status nginx
+	RETVAL=$?
+	;;
+  *)
+	echo "Usage: $0 {start|stop|restart|condrestart|status}"
+	exit 1
+esac
+
+exit $RETVAL
