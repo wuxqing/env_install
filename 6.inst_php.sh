@@ -2,14 +2,16 @@ cur_path=$(cd "$(dirname "$0")"; pwd)
 echo $cur_path
 
 # 安装最新版本PHP（ PHP5.3.14 ）
-src_path="$cur_path/source/"
+src_path="$cur_path/source"
+mkdir ${src_path} -p
+
 php_version="php-5.4.11"
 percona_version='Percona-Server-5.5.21-rel25.0'
 mysql_path="/opt/"$percona_version
 
 cd ${src_path}
 wget http://cn2.php.net/get/${php_version}.tar.bz2/from/this/mirror
-tar xjvf $cur_path/source/${php_version}.tar.bz2
+tar xjvf $src_path/${php_version}.tar.bz2
 cd ${php_version}
 
 # 执行：

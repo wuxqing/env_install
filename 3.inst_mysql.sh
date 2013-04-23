@@ -11,7 +11,7 @@ echo $cur_path
 
 yum install bison ncurses-devel cmake libaio-devel gcc-c++ -y
 
-src_path="$cur_path/source/"
+src_path="$cur_path/source"
 percona_version='Percona-Server-5.5.21-rel25.0'
 mysql_path="/opt/"$percona_version
 mysql_data_path="/data/server/mysql"
@@ -24,7 +24,7 @@ groupadd  mysql
 useradd   mysql -g mysql  -s /sbin/nologin
 useradd -M -r -s /sbin/nologin -d $mysql_data_path mysql
 
-cd ${src_path}/
+cd ${src_path}
 
 # 下载mysql源代码
 # http://www.percona.com/downloads/Percona-Server-5.5/
@@ -36,7 +36,7 @@ wget http://www.percona.com/redir/downloads/Percona-Server-5.5/Percona-Server-5.
 # 在CentOS 6上无法编译通过
 # wget http://www.percona.com/redir/downloads/Percona-Server-5.5/Percona-Server-5.5.16-22.0/source/Percona-Server-5.5.16-rel22.0.tar.gz
 
-tar zxf $cur_path/source/${percona_version}.tar.gz 
+tar zxf $src_path/${percona_version}.tar.gz 
 cd ${src_path}/${percona_version}
 
 # 可以通过  cmake . -LH 查看有哪些可选择的编译参数.

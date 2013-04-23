@@ -1,10 +1,13 @@
 cur_path=$(cd "$(dirname "$0")"; pwd)
 echo $cur_path
 
-cd $cur_path/source/
+src_path="$cur_path/source"
+mkdir ${src_path} -p
+
+cd $src_path
 
 wget ftp://ftp.kddlabs.co.jp/graphics/ImageMagick/ImageMagick-6.7.9-6.tar.bz2
-tar vxf $cur_path/source/ImageMagick-6.7.9-6.tar.bz2
+tar vxf $src_path/ImageMagick-6.7.9-6.tar.bz2
 cd ImageMagick-6.7.9-6
 
 ./configure --with-quantum-depth=8

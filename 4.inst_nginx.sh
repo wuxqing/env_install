@@ -4,7 +4,9 @@ echo $cur_path
 # 1、安装需要的第三方库
 yum install pcre-devel openssl-devel zlib-devel -y
 
-src_path="$cur_path/source/"
+src_path="$cur_path/source"
+mkdir ${src_path} -p
+
 nginx_version="nginx-1.2.6"
  
 # 1、添加 www 用户用来执行nginx
@@ -23,7 +25,7 @@ cd ${src_path}/
 wget http://nginx.org/download/${nginx_version}.tar.gz
 
 # 5、解压，编译，安装
-tar vxzf $cur_path/source/${nginx_version}.tar.gz
+tar vxzf $src_path/${nginx_version}.tar.gz
 cd ${nginx_version}/
            
 ./configure \
