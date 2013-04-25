@@ -21,4 +21,5 @@ gem sources -r https://rubygems.org/
 gem sources -a http://ruby.taobao.org/
 
 # 安装 bundler 
-gem install bundler 
+gem install bundler
+
