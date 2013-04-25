@@ -1,0 +1,12 @@
+1、mysql 无法启动，提示
+...... ERROR! The server quit without updating PID file (/data/server/mysql/AY130422101431250752.pid).
+
+查看错误日志
+cat /data/server/mysql/AY130422101431250752.err
+
+2、mysql 无法启动，提示
+130423 14:18:12 [ERROR] Can't start server : Bind on unix socket: Permission denied
+130423 14:18:12 [ERROR] Do you already have another mysqld server running on socket: /opt/Percona-Server-5.5.21-rel25.0/mysqld.sock ?
+
+修改/opt/Percona-Server-5.5.21-rel25.0/my.cnf
+修改socket选项

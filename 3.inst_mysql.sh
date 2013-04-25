@@ -45,7 +45,7 @@ cmake . \
   -DSYSCONFDIR:PATH=${mysql_path}               \
   -DCMAKE_INSTALL_PREFIX:PATH=${mysql_path}     \
   -DMYSQL_DATADIR:PATH=${mysql_data_path}       \
-  -DMYSQL_UNIX_ADDR=${mysql_path}/mysqld.sock   \
+  -DMYSQL_UNIX_ADDR=/tmp/mysqld.sock   \
   -DCMAKE_BUILD_TYPE:STRING=Release             \
   -DENABLED_PROFILING:BOOL=ON                   \
   -DENABLE_DEBUG_SYNC:BOOL=OFF                  \
