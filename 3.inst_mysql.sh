@@ -12,8 +12,10 @@ echo $cur_path
 yum install bison ncurses-devel cmake libaio-devel gcc-c++ -y
 
 src_path="$cur_path/source"
-percona_version='Percona-Server-5.5.21-rel25.0'
-mysql_path="/opt/"$percona_version
+percona_version='Percona-Server-5.5.30'
+rel_version='30.2'
+mysql_version=${percona_version}-rel${rel_version}
+mysql_path="/opt/"${mysql_version}
 mysql_data_path="/data/server/mysql"
 
 mkdir ${src_path} -p
@@ -27,8 +29,7 @@ useradd -M -r -s /sbin/nologin -d $mysql_data_path mysql
 cd ${src_path}
 
 # 下载mysql源代码
-# http://www.percona.com/downloads/Percona-Server-5.5/
-wget http://www.percona.com/redir/downloads/Percona-Server-5.5/Percona-Server-5.5.21-25.0/source/Percona-Server-5.5.21-rel25.0.tar.gz
+wget http://www.percona.com/redir/downloads/Percona-Server-5.5/${percona_version}-${rel_version}/source/${mysql_version}.tar.gz
 
 # 在CentOS 5.6上无法编译通过
 # wget http://www.percona.com/redir/downloads/Percona-Server-5.5/Percona-Server-5.5.14-20.5/source/Percona-Server-5.5.14-rel20.5.tar.gz
@@ -36,8 +37,8 @@ wget http://www.percona.com/redir/downloads/Percona-Server-5.5/Percona-Server-5.
 # 在CentOS 6上无法编译通过
 # wget http://www.percona.com/redir/downloads/Percona-Server-5.5/Percona-Server-5.5.16-22.0/source/Percona-Server-5.5.16-rel22.0.tar.gz
 
-tar zxf $src_path/${percona_version}.tar.gz 
-cd ${src_path}/${percona_version}
+tar zxf $src_path/${mysql_version}.tar.gz 
+cd ${src_path}/${mysql_version}
 
 # 可以通过  cmake . -LH 查看有哪些可选择的编译参数.
 
@@ -72,13 +73,29 @@ echo "${mysql_path}/lib/" > /etc/ld.so.conf.d/opt_mysql_lib.conf
 echo "${mysql_path}/lib/plugin" >> /etc/ld.so.conf.d/opt_mysql_lib.conf
 ldconfig
 
-cp ${src_path}/${percona_version}/support-files/my-innodb-heavy-4G.cnf ${mysql_path}/my.cnf
+# 注意，建议8G的内存才用my-innodb-heavy-4G.cnf
+cp ${src_path}/${mysql_version}/support-files/my-innodb-heavy-4G.cnf ${mysql_path}/my.cnf
 
 # 开始安装数据
-chmod 700 ${src_path}/${percona_version}/scripts/mysql_install_db
-${src_path}/${percona_version}/scripts/mysql_install_db --defaults-file=${mysql_path}/my.cnf --basedir=${mysql_path} --datadir=${mysql_data_path} --pid-file=${mysql_path}/mysql.pid --user=mysql 
+chmod 700 ${src_path}/${mysql_version}/scripts/mysql_install_db
+${src_path}/${mysql_version}/scripts/mysql_install_db --defaults-file=${mysql_path}/my.cnf --basedir=${mysql_path} --datadir=${mysql_data_path} --pid-file=${mysql_path}/mysql.pid --user=mysql 
 
 chown mysql:mysql -R ${mysql_data_path}
+
+# 建立客户端链接
+# 如果已经安装了mysql客户端的话.
+# 把原来的mysql备份
+# mv /usr/bin/mysql /usr/bin/mysql.bak
+ln -s ${mysql_path}/bin/mysql /usr/bin/mysql
+
+# 添加mysql为系统服务
+cp ${src_path}/${mysql_version}/support-files/mysql.server /etc/init.d/mysqld
+chmod +x /etc/init.d/mysqld
+chkconfig --add mysqld
+chkconfig mysqld on
+
+# 启动mysql服务
+# service mysqld start
 
 echo "启动mysql服务:" 
 echo "  方法1： ${mysql_path}/bin/mysqld_safe &" 
@@ -105,23 +122,3 @@ echo "grant select,insert,update,delete,drop,create on trader.* to 'trader'@\"19
 echo "" 
 echo "退出"
 echo "quit;"
-
-# 建立客户端链接
-# 如果已经安装了mysql客户端的话.
-# 把原来的mysql备份
-# mv /usr/bin/mysql /usr/bin/mysql.bak
-ln -s ${mysql_path}/bin/mysql /usr/bin/mysql
-
-# 添加mysql为系统服务
-cp ${src_path}/${percona_version}/support-files/mysql.server /etc/init.d/mysqld
-chmod +x /etc/init.d/mysqld
-chkconfig --add mysqld
-chkconfig mysqld on
-#cp ${src_path}/${percona_version}/support-files/mysql.server /etc/rc.d/init.d/mysqld
-#chmod 700 /etc/rc.d/init.d/mysqld
-#chkconfig --add mysqld
-#chkconfig --level 345 mysqld on
-#chmod 755 /etc/init.d/mysqld
-
-# 启动mysql服务
-# service mysqld start
