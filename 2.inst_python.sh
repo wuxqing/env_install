@@ -14,7 +14,7 @@ make install
 
 cd $src_path
 curl -O http://python-distribute.org/distribute_setup.py
-python distribute_setup.py
+/opt/python-2.7.4/bin/python distribute_setup.py
 
 #wget http://pypi.python.org/packages/source/s/setuptools/setuptools-0.6c11.tar.gz#md5=7df2a529a074f613b509fb44feefe74e
 #tar vxf $src_path/setuptools-0.6c11.tar.gz
