@@ -19,15 +19,15 @@ python distribute_setup.py
 #wget http://pypi.python.org/packages/source/s/setuptools/setuptools-0.6c11.tar.gz#md5=7df2a529a074f613b509fb44feefe74e
 #tar vxf $src_path/setuptools-0.6c11.tar.gz
 #cd setuptools-0.6c11
-#/opt/python-2.7.3/bin/python setup.py install
+#/opt/python-2.7.4/bin/python setup.py install
 
 #cd $src_path
 #wget http://pypi.python.org/packages/source/v/virtualenvwrapper/virtualenvwrapper-3.6.tar.gz#md5=57d78305b75750a40985f206c80a280f
 #tar vxf virtualenvwrapper-3.6.tar.gz
 #cd virtualenvwrapper-3.6
-#/opt/python-2.7.3/bin/python setup.py install
+#/opt/python-2.7.4/bin/python setup.py install
 
-/opt/python-2.7.3/bin/easy_install virtualenvwrapper
+/opt/python-2.7.4/bin/easy_install virtualenvwrapper
 
 mkdir /work -p
 
