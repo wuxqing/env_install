@@ -17,3 +17,4 @@ generator/
 var/
 tmp/
 *.*~
+source/
