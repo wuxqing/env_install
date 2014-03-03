@@ -5,9 +5,10 @@ src_path="$cur_path/source"
 mkdir ${src_path} -p
 
 # 安装一些工具
-yum install wget vim lsof tcpdump systemtap valgrind -y
+yum install wget vim lsof tcpdump systemtap sysstat valgrind -y
 
 # 安装p7zip
+if [ -e $filename ]
 cd $src_path
 wget 'http://downloads.sourceforge.net/project/p7zip/p7zip/9.20.1/p7zip_9.20.1_src_all.tar.bz2?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fp7zip%2Ffiles%2Flatest%2Fdownload&ts=1359353354&use_mirror=hivelocity'
 tar vxf $src_path/p7zip_9.20.1_src_all.tar.bz2
@@ -47,6 +48,5 @@ wget 'http://downloads.sourceforge.net/project/nload/nload/0.7.4/nload-0.7.4.tar
 tar vxf $src_path/nload-0.7.4.tar.gz
 cd nload-0.7.4
 ./configure
+make
 make install
-
-mkdir /work/log/ -p
