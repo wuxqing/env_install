@@ -70,7 +70,7 @@ cmake . \
   -DENABLE_DTRACE=OFF                           \
   -LH
 
-make
+make -j4
 make install
 
 echo "${mysql_path}/lib/" > /etc/ld.so.conf.d/opt_mysql_lib.conf

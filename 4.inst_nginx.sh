@@ -7,7 +7,7 @@ yum install pcre-devel openssl-devel zlib-devel -y
 src_path="$cur_path/source"
 mkdir ${src_path} -p
 
-nginx_version="nginx-1.2.6"
+nginx_version="nginx-1.4.6"
  
 # 1、添加 www 用户用来执行nginx
 useradd -M -r -s /sbin/nologin -d /opt/${nginx_version}/ www
@@ -48,7 +48,7 @@ cd ${nginx_version}/
   --http-fastcgi-temp-path=/var/tmp/nginx/fcgi/ \
   --http-uwsgi-temp-path=/var/tmp/nginx/uwsgi/
            
-make
+make -j4
 make install
 
 # 6、配置nginx

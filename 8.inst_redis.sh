@@ -6,13 +6,13 @@ mkdir ${src_path} -p
 
 cd $src_path
 
-if [ -f redis-2.6.14.tar.gz ]; then
+if [ -f redis-2.8.7.tar.gz ]; then
   echo ''
 else
-  wget https://redis.googlecode.com/files/redis-2.6.14.tar.gz
+  wget http://download.redis.io/releases/redis-2.8.7.tar.gz
 fi
 
-tar vxf $src_path/redis-2.6.14.tar.gz
-cd redis-2.6.14
+tar vxf $src_path/redis-2.8.7.tar.gz
+cd redis-2.8.7
 
-make PREFIX=/opt/redis-2.6.14 install
+make PREFIX=/opt/redis-2.8.7 install

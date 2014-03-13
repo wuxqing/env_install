@@ -1,12 +1,12 @@
 cur_path=$(cd "$(dirname "$0")"; pwd)
 echo $cur_path
 
-# 安装最新版本PHP（ PHP5.3.14 ）
+# 安装最新版本PHP（ PHP 5.5.10 ）
 src_path="$cur_path/source"
 mkdir ${src_path} -p
 
-php_version="php-5.4.11"
-percona_version='Percona-Server-5.5.21-rel25.0'
+php_version="php-5.5.10"
+percona_version='Percona-Server-5.5.30-rel30.2'
 mysql_path="/opt/"$percona_version
 
 cd ${src_path}

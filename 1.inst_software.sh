@@ -16,8 +16,8 @@ else
 fi
 tar vxf $src_path/p7zip_9.20.1_src_all.tar.bz2
 cd p7zip_9.20.1
-make
-make install
+make -j4
+sudo make install
 
 #cd $src_path
 #wget http://dist.schmorp.de/libev/libev-4.15.tar.gz
@@ -35,7 +35,8 @@ fi
 tar vxf $src_path/tmux-1.6.tar.gz
 cd tmux-1.6
 ./configure
-make install
+make -j4
+sudo make install
 
 #git clone git://git.code.sf.net/p/tmux/tmux-code tmux
 #cd tmux
@@ -51,8 +52,8 @@ fi
 tar vxf $src_path/sqlite-autoconf-3071501.tar.gz
 cd sqlite-autoconf-3071501
 CFLAGS='-O3 -DSQLITE_ENABLE_FTS3 -DSQLITE_ENABLE_FTS3_PARENTHESIS -DSQLITE_ENABLE_ICU' CPPFLAGS=`icu-config --cppflags` LDFLAGS=`icu-config --ldflags` ./configure
-make
-make install
+make -j4
+sudo make install
 
 cd $src_path
 if [ -f nload-0.7.4.tar.gz ]; then
@@ -63,5 +64,5 @@ fi
 tar vxf $src_path/nload-0.7.4.tar.gz
 cd nload-0.7.4
 ./configure
-make
-make install
+make -j4
+sudo make install

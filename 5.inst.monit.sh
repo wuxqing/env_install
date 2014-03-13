@@ -6,7 +6,7 @@ yum install pam-devel -y
 src_path="$cur_path/source"
 mkdir ${src_path} -p
 
-monit_version="monit-5.5"
+monit_version="monit-5.7"
 
 cd ${src_path}/
 

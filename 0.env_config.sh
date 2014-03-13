@@ -19,4 +19,4 @@ wget http://www.canonware.com/download/jemalloc/jemalloc-3.5.1.tar.bz2
 fi
 tar vxf jemalloc-3.5.1.tar.bz2
 cd jemalloc-3.5.1
-sh autogen.sh
+sudo sh autogen.sh
