@@ -6,7 +6,12 @@ mkdir ${src_path} -p
 
 cd $src_path
 
-wget ftp://ftp.kddlabs.co.jp/graphics/ImageMagick/ImageMagick-6.7.9-6.tar.bz2
+if [ -f ImageMagick-6.7.9-6.tar.bz2 ]; then
+  echo ''
+else
+  wget ftp://ftp.kddlabs.co.jp/graphics/ImageMagick/ImageMagick-6.7.9-6.tar.bz2
+fi
+
 tar vxf $src_path/ImageMagick-6.7.9-6.tar.bz2
 cd ImageMagick-6.7.9-6
 

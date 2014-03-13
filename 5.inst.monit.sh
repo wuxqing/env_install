@@ -10,7 +10,12 @@ monit_version="monit-5.5"
 
 cd ${src_path}/
 
-wget http://mmonit.com/monit/dist/${monit_version}.tar.gz
+if [ -f ${monit_version}.tar.gz ]; then
+  echo ''
+else
+  wget http://mmonit.com/monit/dist/${monit_version}.tar.gz
+fi
+
 tar vxf $src_path/monit-5.5.tar.gz
 cd monit-5.5
 ./configure --prefix=/opt/${monit_version}

@@ -5,7 +5,12 @@ src_path="$cur_path/source"
 mkdir ${src_path} -p
 cd $src_path
 
-wget wget http://ftp.postgresql.org/pub/source/v9.3.2/postgresql-9.3.2.tar.bz2
+if [ -f postgresql-9.3.2.tar.bz2 ]; then
+  echo ''
+else
+  wget wget http://ftp.postgresql.org/pub/source/v9.3.2/postgresql-9.3.2.tar.bz2
+fi
+
 tar vxf $src_path/postgresql-9.3.2.tar.bz2
 cd postgresql-9.3.2
 

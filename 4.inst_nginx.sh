@@ -22,7 +22,11 @@ mkdir -p /opt/${nginx_version}/conf/sites
 
 # 4、下载nginx最新稳定版源代码
 cd ${src_path}/
-wget http://nginx.org/download/${nginx_version}.tar.gz
+if [ -f ${nginx_version}.tar.gz ]; then
+  echo ''
+else
+  wget http://nginx.org/download/${nginx_version}.tar.gz
+fi
 
 # 5、解压，编译，安装
 tar vxzf $src_path/${nginx_version}.tar.gz

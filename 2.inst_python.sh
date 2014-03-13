@@ -5,7 +5,12 @@ src_path="$cur_path/source"
 mkdir ${src_path} -p
 
 cd $src_path
-wget http://www.python.org/ftp/python/2.7.6/Python-2.7.6.tgz
+if [ -f Python-2.7.6.tgz ]; then
+  echo ''
+else
+  wget http://www.python.org/ftp/python/2.7.6/Python-2.7.6.tgz
+fi
+
 tar vxf $src_path/Python-2.7.6.tar.bz2
 cd Python-2.7.6
 ./configure --prefix=/opt/python-2.7.6
@@ -28,8 +33,6 @@ curl -O http://python-distribute.org/distribute_setup.py
 #/opt/python-2.7.6/bin/python setup.py install
 
 /opt/python-2.7.6/bin/easy_install virtualenv==1.9
-
-mkdir /work -p
 
 echo "PATH=\$PATH:/opt/python-2.7.6/bin" >> ~/.bash_profile
 echo "export PATH" >> ~/.bash_profile

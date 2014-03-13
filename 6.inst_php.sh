@@ -10,7 +10,12 @@ percona_version='Percona-Server-5.5.21-rel25.0'
 mysql_path="/opt/"$percona_version
 
 cd ${src_path}
-wget http://cn2.php.net/get/${php_version}.tar.bz2/from/this/mirror
+if [ -f ${php_version}.tar.bz2 ]; then
+  echo ''
+else
+  wget http://cn2.php.net/get/${php_version}.tar.bz2/from/this/mirror
+fi
+
 tar xjvf $src_path/${php_version}.tar.bz2
 cd ${php_version}
 

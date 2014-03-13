@@ -6,7 +6,12 @@ mkdir ${src_path} -p
 
 cd $src_path
 
-wget https://redis.googlecode.com/files/redis-2.6.14.tar.gz
+if [ -f redis-2.6.14.tar.gz ]; then
+  echo ''
+else
+  wget https://redis.googlecode.com/files/redis-2.6.14.tar.gz
+fi
+
 tar vxf $src_path/redis-2.6.14.tar.gz
 cd redis-2.6.14
 

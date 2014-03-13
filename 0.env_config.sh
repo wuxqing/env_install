@@ -12,6 +12,11 @@ yum install pam-devel openssl-devel pcre-devel zlib-devel libjpeg-devel libtiff-
     libxml2-devel libxslt-devel openssl-devel kernel-devel libpcap-devel ncurses-devel libaio libaio-devel libicu libicu-devel -y
 
 cd $src_path
-git clone git://canonware.com/jemalloc.git
-cd jemalloc
+if [ -f jemalloc-3.5.1.tar.bz2 ]; then
+  echo ''
+else
+wget http://www.canonware.com/download/jemalloc/jemalloc-3.5.1.tar.bz2
+fi
+tar vxf jemalloc-3.5.1.tar.bz2
+cd jemalloc-3.5.1
 sh autogen.sh

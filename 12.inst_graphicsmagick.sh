@@ -10,8 +10,13 @@ cd $src_path
 
 yum install libjpeg-turbo-devel freetype-devel libpng-devel libtiff-devel boost-devel
 
-#wget http://78.108.103.11/MIRROR/ftp/GraphicsMagick/GraphicsMagick-LATEST.tar.bz2
-wget http://78.108.103.11/MIRROR/ftp/GraphicsMagick/1.3/GraphicsMagick-1.3.18.tar.bz2
+if [ -f GraphicsMagick-1.3.18.tar.bz2 ]; then
+  echo ''
+else
+  #wget http://78.108.103.11/MIRROR/ftp/GraphicsMagick/GraphicsMagick-LATEST.tar.bz2
+  wget http://78.108.103.11/MIRROR/ftp/GraphicsMagick/1.3/GraphicsMagick-1.3.18.tar.bz2
+fi
+
 tar vxf $src_path/GraphicsMagick-1.3.18.tar.bz2
 cd GraphicsMagick-1.3.18
 

@@ -6,7 +6,12 @@ mkdir ${src_path} -p
 
 cd $src_path
 
-wget ftp://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p392.tar.gz
+if [ -f ruby-1.9.3-p392.tar.gz ]; then
+  echo ''
+else
+  wget ftp://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p392.tar.gz
+fi
+
 tar vxf $src_path/ruby-1.9.3-p392.tar.gz
 cd ruby-1.9.3-p392
 ./configure --prefix=/opt/ruby-1.9.3-p392
